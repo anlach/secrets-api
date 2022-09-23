@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Secrets</title>
+    <style>
+        form * {
+            display: block;
+        }
+
+        html {
+            background-color: black;
+            color: white;
+            padding: 10px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+
+        div, a {
+            color: rgb(227, 244, 255);
+        }
+
+        div {
+            background-color: rgb(48, 3, 73);
+            border-radius: 5px;
+            margin: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 30rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Secrets, Secrets</h1>
+    <h2>are no fun?</h2>
+    <p>Choose a database ID and encryption key for storing your message.</p>
+    <div class="keys">
+        <h3>Set/Overwrite a new message</h3>
+        <form id="message-form" method="post">
+            <label for="dbid">Database ID (2-8 characters):</label>
+            <input type="text" id="dbid" name="dbid" required minlength="2" maxlength="8" size="8">
+            <label for="key">Encryption Key (2-8 characters):</label>
+            <input type="text" id="key" name="key" required minlength="2" maxlength="8" size="8">
+            <label for="message">Message:</label>
+            <textarea type="text" id="message" name="message" rows="4" cols="40" minlength="1"></textarea>
+            <input type="submit" value="Post Message" onclick="updateLink(event)">
+        </form>
+    </div>
+    <div>
+        <h3>Anyone can get the message with:</h3>
+        <a id="geturl" href="">(first post a message)</a>
+    </div>
+    <p>The message is stored encrypted in the DynamoDB database without the key.</p>
+    <p>Created by Andrew LaCharite</p>
+</body>
+
+<script>
+    let form = document.getElementById("message-form");
+    function handleForm(event) { event.preventDefault(); }
+    form.addEventListener('submit', handleForm);
+
+    function updateLink(event) {
+        console.log("calling updateLink");
+        let link = document.getElementById("geturl");
+        link.href = "helloAndrew";
+        link.innerHTML = "this link";
+        event.stopPropagation();
+    }
+</script>
+
+</html>
