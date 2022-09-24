@@ -4,42 +4,31 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link href="./style.css" type="text/css" rel="stylesheet">
     <title>Secrets</title>
-    <style>
-        form * {
-            display: block;
-        }
-
-        html {
-            background-color: black;
-            color: white;
-            padding: 10px;
-        }
-        h1, h2 {
-            text-align: center;
-        }
-
-        div, a {
-            color: rgb(227, 244, 255);
-        }
-
-        div {
-            background-color: rgb(48, 3, 73);
-            border-radius: 5px;
-            margin: 10px;
-            padding: 10px;
-            width: 90%;
-            max-width: 30rem;
-        }
-    </style>
 </head>
 
 <body>
     <h1>Secrets, Secrets</h1>
     <h2>are no fun?</h2>
+    <h2 class="left">API Methods</h2>
+    <div class="api-docs">
+        <div class="method">GET</div>
+        <div class="route">/</div>
+        <div class="resource">This page</div>
+        <div class="method">GET</div>
+        <div class="route">/history</div>
+        <div class="resource">Returns the last 10 messages as a list</div>
+        <div class="method">GET</div>
+        <div class="route">/message/<span class="param">{message-id}</span>?key=<span class="param">{key}</span></div>
+        <div class="resource">Retrieve and decrypt a message</div>
+        <div class="method">POST</div>
+        <div class="route">/message/<span class="param">{message-id}</span>?key=<span class="param">{key}</span></div>
+        <div class="resource">Post or overwrite a message and return a different page with the details</div>
+    </div>
     <p>Choose a database ID and encryption key for storing your message.</p>
-    <div class="keys">
-        <h3>Set/Overwrite a new message</h3>
+    <div class="main">
+        <h3>Post a message</h3>
         <form id="message-form" method="post">
             <label for="dbid">Database ID (2-8 characters):</label>
             <input type="text" id="dbid" name="dbid" required minlength="2" maxlength="8" size="8">
@@ -50,26 +39,8 @@
             <input type="submit" value="Post Message" onclick="updateLink(event)">
         </form>
     </div>
-    <div>
-        <h3>Anyone can get the message with:</h3>
-        <a id="geturl" href="">(first post a message)</a>
-    </div>
-    <p>The message is stored encrypted in the DynamoDB database without the key.</p>
+    <p>The message is encrypted and stored in the DynamoDB database without the key.</p>
     <p>Created by Andrew LaCharite</p>
 </body>
-
-<script>
-    let form = document.getElementById("message-form");
-    function handleForm(event) { event.preventDefault(); }
-    form.addEventListener('submit', handleForm);
-
-    function updateLink(event) {
-        console.log("calling updateLink");
-        let link = document.getElementById("geturl");
-        link.href = "helloAndrew";
-        link.innerHTML = "this link";
-        event.stopPropagation();
-    }
-</script>
 
 </html>
