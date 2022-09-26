@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="../../style.css" type="text/css" rel="stylesheet">
+    <title>Secrets</title>
+</head>
+
+<body>
+    <h1>Secrets, Secrets</h1>
+    <h2>are no fun?</h2>
+    <div class="main">
+        <p>Encrypted message with {gpg}</p>
+        <p>Storing base64-encoded message in DynamoDB as: </p>
+        <div class="binary">
+            <h3 class="mono">{encrypted}</h3>
+        </div>
+        <p>Use or save the following GET request to read and decrypt the message:</p>
+        <a id="geturl" href="{url}">Decrypt Message</a>
+    </div>
+    <p>Created by Andrew LaCharite</p>
+</body>
+
+</html>

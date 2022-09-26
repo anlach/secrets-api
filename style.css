@@ -57,3 +57,7 @@ div.route {
 div.route, div.resource {
     overflow: scroll;
 }
+.binary {
+    overflow: scroll;
+    white-space: nowrap;
+}

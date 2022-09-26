@@ -17,30 +17,41 @@
         <div class="route">/</div>
         <div class="resource">This page</div>
         <div class="method">GET</div>
-        <div class="route">/history</div>
-        <div class="resource">Returns the last 10 messages as a list</div>
+        <div class="route">/all</div>
+        <div class="resource">Returns up to 100 messages as a list</div>
         <div class="method">GET</div>
         <div class="route">/message/<span class="param">{message-id}</span>?key=<span class="param">{key}</span></div>
         <div class="resource">Retrieve and decrypt a message</div>
         <div class="method">POST</div>
         <div class="route">/message/<span class="param">{message-id}</span>?key=<span class="param">{key}</span></div>
-        <div class="resource">Post or overwrite a message and return a different page with the details</div>
+        <div class="resource">Post or overwrite a message and return a different page with the details. Must include a 'message' key in the body with the message as the value - either JSON or URL encoded.</div>
     </div>
-    <p>Choose a database ID and encryption key for storing your message.</p>
+    <p>Choose a message ID and encryption key for storing your message.</p>
     <div class="main">
         <h3>Post a message</h3>
         <form id="message-form" method="post">
-            <label for="dbid">Database ID (2-8 characters):</label>
+            <label for="dbid">Message ID (2-8 characters):</label>
             <input type="text" id="dbid" name="dbid" required minlength="2" maxlength="8" size="8">
             <label for="key">Encryption Key (2-8 characters):</label>
             <input type="text" id="key" name="key" required minlength="2" maxlength="8" size="8">
             <label for="message">Message:</label>
             <textarea type="text" id="message" name="message" rows="4" cols="40" minlength="1"></textarea>
-            <input type="submit" value="Post Message" onclick="updateLink(event)">
+            <input type="submit" value="Post Message">
         </form>
     </div>
     <p>The message is encrypted and stored in the DynamoDB database without the key.</p>
     <p>Created by Andrew LaCharite</p>
+    <script>
+
+      const messageForm = document.getElementById("message-form");
+
+      messageForm.addEventListener("submit", () => {
+        const messageID = document.getElementById("dbid").value;
+        const key = document.getElementById("key").value;
+        messageForm.action = `/message/${messageID}?key=${key}`;
+        messageForm.submit();
+      });
+    </script>
 </body>
 
 </html>
