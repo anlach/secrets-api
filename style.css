@@ -61,3 +61,6 @@ div.route, div.resource {
     overflow: scroll;
     white-space: nowrap;
 }
+.param {
+    color: rgb(236, 185, 90);
+}
